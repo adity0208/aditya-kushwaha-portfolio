@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aayush Bharti | Full Stack Developer Portfolio",
-  description: 'Portfolio of Aayush Bharti, a full stack developer turning ideas into seamless digital experiences.',
+  title: "Aditya Kushwaha | Full Stack Developer Portfolio",
+  description: 'Portfolio of Aditya Kushwaha, a full stack developer turning ideas into seamless digital experiences.',
 };
 
 export default function RootLayout({

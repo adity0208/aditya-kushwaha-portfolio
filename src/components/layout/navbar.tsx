@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings } from 'lucide-react';
+import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings, MessageSquareText, Info, Star } from 'lucide-react'; // Added MessageSquareText, Info, Star for new nav
 
 interface NavItem {
   href: string;
@@ -13,13 +13,13 @@ interface NavItem {
   icon: React.ElementType;
 }
 
+// Updated navItems to match image: Home, About, Work, Blog, More. "Book a Call" is separate.
 const navItems: NavItem[] = [
   { href: '#home', label: 'Home', icon: HomeIcon },
-  { href: '#about', label: 'About', icon: User },
-  { href: '#projects', label: 'Work', icon: Briefcase }, // Points to existing projects section
-  { href: '#blog', label: 'Blog', icon: FileText },
-  { href: '#more', label: 'More', icon: MoreHorizontal },
-  // { href: '#contact', label: 'Book a Call', icon: Phone }, // Will be a button for desktop
+  { href: '#about', label: 'About', icon: Info }, // Changed icon to Info for 'About'
+  { href: '#projects', label: 'Work', icon: Briefcase },
+  { href: '#skills', label: 'Skills', icon: Star }, // Placeholder, as blog/more sections don't exist yet
+  { href: '#certifications', label: 'Certifications', icon: FileText }, // Placeholder
 ];
 
 const Navbar: FC = () => {
@@ -33,9 +33,9 @@ const Navbar: FC = () => {
       setIsScrolled(window.scrollY > 20);
       
       let currentSection = 'home';
-      // Include 'Book a Call' for active state detection if it scrolls to #contact
-      const allNavItems = [...navItems, { href: '#contact', label: 'Book a Call', icon: Phone}];
-      allNavItems.forEach(item => {
+      // Include 'contact' for active state detection for "Book a Call"
+      const allNavItemsForScroll = [...navItems, { href: '#contact', label: 'Book a Call', icon: Phone }];
+      allNavItemsForScroll.forEach(item => {
         const section = document.getElementById(item.href.substring(1));
         if (section && section.offsetTop <= window.scrollY + window.innerHeight / 2) {
           currentSection = item.href.substring(1);
@@ -45,7 +45,7 @@ const Navbar: FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call on mount to set initial state
+    handleScroll(); 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -67,16 +67,16 @@ const Navbar: FC = () => {
           </a>
         </Link>
       ))}
-      {isMobile && (
+      {isMobile && ( // "Book a Call" button for mobile drawer
          <Link href="#contact" legacyBehavior passHref>
-          <a
-            onClick={onItemClick}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              activeSection === 'contact' ? 'text-primary' : 'text-muted-foreground'
-            }`}
-          >
-            Book a Call
-          </a>
+            <Button
+              onClick={onItemClick}
+              variant="default"
+              size="sm"
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mt-2"
+            >
+              Book a Call
+            </Button>
         </Link>
       )}
     </>
@@ -86,16 +86,16 @@ const Navbar: FC = () => {
     <header className={`sticky top-0 z-50 w-full border-b border-border/50 transition-all duration-300 ${isScrolled ? 'bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/50 shadow-md' : 'bg-transparent'}`}>
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="#home" className="flex items-center gap-2" prefetch={false}>
-          <span className="text-2xl font-bold text-primary">AB</span>
-          <span className="font-semibold text-lg text-foreground hidden sm:inline-block">Aayush Bharti</span>
+          <span className="text-2xl font-bold text-primary">AK</span>
+          <span className="font-semibold text-lg text-foreground hidden sm:inline-block">Aditya Kushwaha</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-4">
+        <nav className="hidden md:flex items-center gap-6"> {/* Increased gap for desktop nav items */}
           <NavLinks />
-          <Button asChild size="sm" className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button asChild size="sm" className="ml-2 bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link href="#contact">Book a Call</Link>
           </Button>
         </nav>
-        {/* Placeholder for theme toggle or settings - currently not functional */}
+        {/* Optional: Theme toggle or settings icon can be added here if needed in future */}
         {/* <Button variant="ghost" size="icon" className="hidden md:inline-flex text-muted-foreground hover:text-primary">
           <Settings className="h-5 w-5" />
           <span className="sr-only">Settings</span>
@@ -107,13 +107,15 @@ const Navbar: FC = () => {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="bg-background/95 backdrop-blur-lg">
-            <div className="grid gap-4 p-4">
-              <Link href="#home" className="flex items-center gap-2 mb-4" prefetch={false}>
-                <span className="text-2xl font-bold text-primary">AB</span>
-                <span className="font-semibold text-lg text-foreground">Aayush Bharti</span>
-              </Link>
-              <nav className="grid gap-3">
+          <SheetContent side="right" className="bg-background/95 backdrop-blur-lg w-[250px] sm:w-[300px]">
+            <div className="flex flex-col h-full">
+              <div className="p-4 border-b border-border/50">
+                <Link href="#home" className="flex items-center gap-2 mb-4" prefetch={false} onClick={() => document.querySelector<HTMLButtonElement>('[data-radix-dialog-close]')?.click()}>
+                  <span className="text-2xl font-bold text-primary">AK</span>
+                  <span className="font-semibold text-lg text-foreground">Aditya Kushwaha</span>
+                </Link>
+              </div>
+              <nav className="flex flex-col gap-3 p-4 flex-grow">
                 <NavLinks onItemClick={() => document.querySelector<HTMLButtonElement>('[data-radix-dialog-close]')?.click()} isMobile={true} />
               </nav>
             </div>

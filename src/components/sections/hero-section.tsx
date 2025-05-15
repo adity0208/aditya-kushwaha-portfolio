@@ -35,15 +35,15 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
           <span className="block mt-2 sm:mt-3">into seamless <span className="italic">digital experiences</span></span>
         </h1>
         <p className="mt-8 max-w-xl mx-auto text-lg text-muted-foreground sm:text-xl md:text-2xl">
-          Hello, I'm Aayush Bharti <span role="img" aria-label="waving hand">👋</span> a Full Stack Developer.
+          Hello, I'm Aditya Kushwaha <span role="img" aria-label="waving hand">👋</span> a Full Stack Developer.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-transform hover:scale-105">
             <Link href="#contact">Let's Connect <ArrowRight className="ml-2 h-5 w-5" /></Link>
           </Button>
-          <Link href="mailto:hello@aayushbharti.in" className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors">
+          <Link href="mailto:adityakushwaha0208@gmail.com" className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors">
             <Mail className="mr-2 h-4 w-4" />
-            hello@aayushbharti.in
+            adityakushwaha0208@gmail.com
           </Link>
         </div>
         <div className="mt-12 flex justify-center space-x-6">
@@ -55,8 +55,6 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
           </Link>
         </div>
       </div>
-      
-      {/* You can add more decorative elements here for stars if desired, e.g., absolutely positioned small dots or a subtle noise pattern */}
     </section>
   );
 };

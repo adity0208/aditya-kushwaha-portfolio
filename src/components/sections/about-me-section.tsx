@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Award, Lightbulb, Users } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Github, Linkedin, Twitter, ArrowRight } from 'lucide-react';
 
 interface AboutMeSectionProps {
   id: string;
@@ -9,48 +10,69 @@ interface AboutMeSectionProps {
 
 const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
   return (
-    <section id={id} className="py-16 sm:py-20 bg-secondary">
+    <section id={id} className="py-16 sm:py-24 bg-background text-foreground">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-center text-primary sm:text-4xl mb-12">
-          About Me
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-          <div className="md:col-span-2 flex justify-center">
-            <Image
-              src="https://placehold.co/400x400.png"
-              alt="Aayush Bharti" // Updated alt text
-              width={300}
-              height={300}
-              className="rounded-full shadow-xl border-4 border-primary/50"
-              data-ai-hint="professional portrait"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          {/* Left Column: Text Content */}
+          <div className="md:pr-8">
+            <p className="text-sm uppercase tracking-wider text-primary font-semibold mb-2">
+              KNOW ABOUT ME
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
+              Full-Stack Developer and a little bit of <span className="text-accent">everything</span>
+            </h2>
+            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                I'm Aditya Kushwaha, a proactive full-stack developer passionate
+                about creating dynamic web experiences. From frontend to
+                backend, I thrive on solving complex problems with clean,
+                efficient code. My expertise spans React, Next.js, and Node.js,
+                and I'm always eager to learn more.
+              </p>
+              <p>
+                When I'm not immersed in work, I'm exploring new ideas and
+                staying curious. Life's about balance, and I love embracing
+                every part of it.
+              </p>
+              <p>
+                I believe in waking up each day eager to make a difference!
+              </p>
+            </div>
+            <div className="mt-8 flex items-center space-x-6">
+              <Link href="https://www.linkedin.com/in/aditya-kushwaha-b89a24247/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                <Linkedin className="h-7 w-7 text-muted-foreground hover:text-primary transition-colors" />
+              </Link>
+              <Link href="https://github.com/adityakushwaha0208" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                <Github className="h-7 w-7 text-muted-foreground hover:text-primary transition-colors" />
+              </Link>
+              {/* Using Twitter as a placeholder for the bird icon, assuming X/Twitter */}
+              <Link href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile">
+                <Twitter className="h-7 w-7 text-muted-foreground hover:text-primary transition-colors" />
+              </Link>
+            </div>
+            <Button asChild variant="link" className="mt-8 px-0 text-primary hover:text-accent">
+              <Link href="#projects">
+                More about me <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
-          <div className="md:col-span-3">
-            <Card className="shadow-lg bg-card text-card-foreground">
-              <CardContent className="p-6 md:p-8">
-                <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                  Hello! I'm Aayush Bharti, a software engineering enthusiast with a deep-seated passion for technology and its potential to solve real-world problems. My journey into software development is driven by a curiosity to understand how things work and a desire to build innovative, user-centric solutions.
-                </p>
-                <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                  I thrive on challenges and continuously seek opportunities to expand my skill set. My core expertise lies in full-stack development, leveraging modern web technologies to create impactful applications. I'm particularly interested in the intersection of web development and Artificial Intelligence.
-                </p>
-                <h3 className="text-xl font-semibold text-primary mt-6 mb-3">Key Highlights:</h3>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start">
-                    <Award className="h-5 w-5 text-accent mr-3 mt-1 flex-shrink-0" />
-                    <span>Proven ability to develop innovative solutions and take projects from concept to deployment.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Users className="h-5 w-5 text-accent mr-3 mt-1 flex-shrink-0" />
-                    <span>Experienced in collaborative environments, contributing to team projects and hackathons.</span>
-                  </li>
-                   <li className="flex items-start">
-                    <Lightbulb className="h-5 w-5 text-accent mr-3 mt-1 flex-shrink-0" />
-                    <span>Committed to lifelong learning and applying cutting-edge skills to create scalable and personalized technology solutions.</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+
+          {/* Right Column: Image/Logo */}
+          <div className="flex justify-center items-center">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
+              <Image
+                src="https://placehold.co/400x400.png" 
+                alt="Aditya Kushwaha Logo - AK"
+                layout="fill"
+                objectFit="contain" // Or 'cover' depending on desired effect for a logo
+                className="rounded-full shadow-2xl" // Example styling
+                data-ai-hint="logo AK lettermark circular"
+              />
+              {/* Optional: Add decorative elements here if needed, like the blue radar background in the example image.
+                  This could be complex with pure CSS and might require SVG or multiple layered divs.
+                  For simplicity, a placeholder image is used.
+              */}
+            </div>
           </div>
         </div>
       </div>
