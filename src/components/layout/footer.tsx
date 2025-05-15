@@ -17,7 +17,7 @@ const Footer: FC = () => {
           </Link>
         </div>
         <p className="text-sm">
-          &copy; {currentYear} Aditya Kushwaha. All rights reserved.
+          &copy; {currentYear} Aayush Bharti. All rights reserved.
         </p>
         <p className="text-xs mt-1">
           Built with Next.js and Tailwind CSS. Hosted on Firebase.

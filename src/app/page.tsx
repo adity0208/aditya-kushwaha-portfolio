@@ -6,6 +6,10 @@ import ProjectsSection from '@/components/sections/projects-section';
 import SkillsSection from '@/components/sections/skills-section';
 import CertificationsSection from '@/components/sections/certifications-section';
 import ContactSection from '@/components/sections/contact-section';
+// Placeholder sections for new nav items if they become actual pages/sections
+// import BlogSection from '@/components/sections/blog-section'; 
+// import MoreSection from '@/components/sections/more-section';
+
 
 export default function HomePage() {
   return (
@@ -14,10 +18,12 @@ export default function HomePage() {
       <main className="flex-grow">
         <HeroSection id="home" />
         <AboutMeSection id="about" />
-        <ProjectsSection id="projects" />
+        <ProjectsSection id="projects" /> {/* Corresponds to "Work" in new nav */}
         <SkillsSection id="skills" />
         <CertificationsSection id="certifications" />
-        <ContactSection id="contact" />
+        {/* <BlogSection id="blog" /> */}
+        {/* <MoreSection id="more" /> */}
+        <ContactSection id="contact" /> {/* Corresponds to "Book a Call" in new nav */}
       </main>
       <Footer />
     </div>
