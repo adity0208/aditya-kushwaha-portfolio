@@ -92,7 +92,7 @@ const Navbar: FC = () => {
     >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="#home" className="flex items-center gap-2" prefetch={false}>
-          <span className="text-2xl font-bold text-primary">AK</span>
+          <span className="text-2xl font-bold text-primary" style={{ fontFamily: 'cursive' }}>AK</span>
           <span className="font-semibold text-lg text-foreground hidden sm:inline-block">Aditya Kushwaha</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6"> 
@@ -112,7 +112,7 @@ const Navbar: FC = () => {
             <div className="flex flex-col h-full">
               <div className="p-4 border-b border-border/50">
                 <Link href="#home" className="flex items-center gap-2 mb-4" prefetch={false} onClick={() => document.querySelector<HTMLButtonElement>('[data-radix-dialog-close]')?.click()}>
-                  <span className="text-2xl font-bold text-primary">AK</span>
+                  <span className="text-2xl font-bold text-primary" style={{ fontFamily: 'cursive' }}>AK</span>
                   <span className="font-semibold text-lg text-foreground">Aditya Kushwaha</span>
                 </Link>
               </div>

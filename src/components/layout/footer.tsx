@@ -51,7 +51,7 @@ const Footer: FC = () => {
           {/* Left Column: Logo, Bio, Copyright, Social */}
           <div className="md:col-span-2 lg:col-span-1 flex flex-col space-y-4">
             <Link href="#home" className="flex items-center gap-2" prefetch={false}>
-              <span className="text-3xl font-bold text-primary">AK</span>
+              <span className="text-3xl font-bold text-primary" style={{ fontFamily: 'cursive' }}>AK</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               I'm Aditya - a full-stack developer, freelancer & problem solver. Thanks for checking out my site!
