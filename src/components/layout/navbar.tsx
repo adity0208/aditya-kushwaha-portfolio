@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings, MessageSquareText, Info, Star } from 'lucide-react';
+import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings, MessageSquareText, Info, Star, BookOpen, Sparkles } from 'lucide-react';
 
 interface NavItem {
   href: string;
@@ -14,13 +14,13 @@ interface NavItem {
   icon: React.ElementType;
 }
 
-// Updated navItems: Removed Skills and Certifications
+// Updated navItems: Added Blog and More
 const navItems: NavItem[] = [
   { href: '#home', label: 'Home', icon: HomeIcon },
-  { href: '#about', label: 'About', icon: Info }, 
+  { href: '#about', label: 'About', icon: Info },
   { href: '#projects', label: 'Work', icon: Briefcase },
-  // { href: '#skills', label: 'Skills', icon: Star }, // Removed as per request
-  // { href: '#certifications', label: 'Certifications', icon: FileText }, // Removed as per request
+  { href: '/blog', label: 'Blog', icon: BookOpen }, // Placeholder link, can be updated to a section or page
+  { href: '/more', label: 'More', icon: Sparkles }, // Placeholder link
 ];
 
 const Navbar: FC = () => {

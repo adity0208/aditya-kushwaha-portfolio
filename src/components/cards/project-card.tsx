@@ -1,3 +1,4 @@
+
 import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +12,7 @@ export interface Project {
   description: string;
   longDescription?: string;
   imageUrls: { src: string; hint: string }[];
-  keyFeatures?: string[]; // Added for the new project section layout
+  keyFeatures?: string[]; 
   tags: string[];
   liveLink?: string;
   githubLink?: string;

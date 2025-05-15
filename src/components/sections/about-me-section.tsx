@@ -1,3 +1,4 @@
+
 import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,10 +40,10 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
               </p>
             </div>
             <div className="mt-8 flex items-center space-x-6">
-              <Link href="https://www.linkedin.com/in/aditya-kushwaha-b89a24247/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+              <Link href="https://www.linkedin.com/in/aditya-kushwaha-512581259/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                 <Linkedin className="h-7 w-7 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
-              <Link href="https://github.com/adityakushwaha0208" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+              <Link href="https://github.com/adity0208/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                 <Github className="h-7 w-7 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
               {/* Using Twitter as a placeholder for the bird icon, assuming X/Twitter */}
@@ -68,10 +69,6 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
                 className="rounded-full shadow-2xl" // Example styling
                 data-ai-hint="logo AK"
               />
-              {/* Optional: Add decorative elements here if needed, like the blue radar background in the example image.
-                  This could be complex with pure CSS and might require SVG or multiple layered divs.
-                  For simplicity, a placeholder image is used.
-              */}
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+
 import type { FC } from 'react';
 import Link from 'next/link';
 import { Github, Linkedin, Twitter } from 'lucide-react';
@@ -19,7 +20,7 @@ const linkColumns: LinkColumn[] = [
       { href: '#home', label: 'Home' },
       { href: '#about', label: 'About' },
       { href: '#projects', label: 'Projects' }, // "Work" in nav points to #projects
-      { href: '#', label: 'Blog' }, // Placeholder
+      { href: '/blog', label: 'Blog' }, // Placeholder, matches navbar
     ],
   },
   {
@@ -35,7 +36,7 @@ const linkColumns: LinkColumn[] = [
     title: 'Extra',
     links: [
       { href: '#contact', label: 'Book a call' },
-      { href: '#', label: 'Links' }, // Placeholder
+      { href: '/more', label: 'Links' }, // Placeholder, can match 'More' from navbar
     ],
   },
 ];
@@ -59,10 +60,10 @@ const Footer: FC = () => {
               &copy; {currentYear} Aditya Kushwaha.
             </p>
             <div className="flex space-x-4 mt-2">
-              <Link href="https://www.linkedin.com/in/aditya-kushwaha-b89a24247/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+              <Link href="https://www.linkedin.com/in/aditya-kushwaha-512581259/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                 <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
-              <Link href="https://github.com/adityakushwaha0208" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+              <Link href="https://github.com/adity0208/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                 <Github className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
               <Link href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile"> {/* Replace with actual Twitter if available */}
