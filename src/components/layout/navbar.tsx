@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { FC } from 'react';
@@ -83,7 +84,13 @@ const Navbar: FC = () => {
   );
 
   return (
-    <header className={`sticky top-0 z-50 w-full border-b border-border/50 transition-all duration-300 ${isScrolled ? 'bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/50 shadow-md' : 'bg-transparent'}`}>
+    <header 
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out
+                  ${isScrolled 
+                    ? 'bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/50 shadow-md border-b border-border/50' 
+                    : 'bg-transparent border-b border-transparent'
+                  }`}
+    >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="#home" className="flex items-center gap-2" prefetch={false}>
           <span className="text-2xl font-bold text-primary">AK</span>
