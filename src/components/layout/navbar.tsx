@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings, MessageSquareText, Info, Star } from 'lucide-react'; // Added MessageSquareText, Info, Star for new nav
+import { Menu, Briefcase, User, FileText, MoreHorizontal, Phone, Home as HomeIcon, Settings, MessageSquareText, Info, Star } from 'lucide-react';
 
 interface NavItem {
   href: string;
@@ -14,13 +14,13 @@ interface NavItem {
   icon: React.ElementType;
 }
 
-// Updated navItems to match image: Home, About, Work, Blog, More. "Book a Call" is separate.
+// Updated navItems: Removed Skills and Certifications
 const navItems: NavItem[] = [
   { href: '#home', label: 'Home', icon: HomeIcon },
-  { href: '#about', label: 'About', icon: Info }, // Changed icon to Info for 'About'
+  { href: '#about', label: 'About', icon: Info }, 
   { href: '#projects', label: 'Work', icon: Briefcase },
-  { href: '#skills', label: 'Skills', icon: Star }, // Placeholder, as blog/more sections don't exist yet
-  { href: '#certifications', label: 'Certifications', icon: FileText }, // Placeholder
+  // { href: '#skills', label: 'Skills', icon: Star }, // Removed as per request
+  // { href: '#certifications', label: 'Certifications', icon: FileText }, // Removed as per request
 ];
 
 const Navbar: FC = () => {
@@ -34,11 +34,10 @@ const Navbar: FC = () => {
       setIsScrolled(window.scrollY > 20);
       
       let currentSection = 'home';
-      // Include 'contact' for active state detection for "Book a Call"
       const allNavItemsForScroll = [...navItems, { href: '#contact', label: 'Book a Call', icon: Phone }];
       allNavItemsForScroll.forEach(item => {
-        const section = document.getElementById(item.href.substring(1));
-        if (section && section.offsetTop <= window.scrollY + window.innerHeight / 2) {
+        const sectionElement = document.getElementById(item.href.substring(1));
+        if (sectionElement && sectionElement.offsetTop <= window.scrollY + window.innerHeight / 2) {
           currentSection = item.href.substring(1);
         }
       });
@@ -68,7 +67,7 @@ const Navbar: FC = () => {
           </a>
         </Link>
       ))}
-      {isMobile && ( // "Book a Call" button for mobile drawer
+      {isMobile && ( 
          <Link href="#contact" legacyBehavior passHref>
             <Button
               onClick={onItemClick}
@@ -96,17 +95,12 @@ const Navbar: FC = () => {
           <span className="text-2xl font-bold text-primary">AK</span>
           <span className="font-semibold text-lg text-foreground hidden sm:inline-block">Aditya Kushwaha</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6"> {/* Increased gap for desktop nav items */}
+        <nav className="hidden md:flex items-center gap-6"> 
           <NavLinks />
           <Button asChild size="sm" className="ml-2 bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link href="#contact">Book a Call</Link>
           </Button>
         </nav>
-        {/* Optional: Theme toggle or settings icon can be added here if needed in future */}
-        {/* <Button variant="ghost" size="icon" className="hidden md:inline-flex text-muted-foreground hover:text-primary">
-          <Settings className="h-5 w-5" />
-          <span className="sr-only">Settings</span>
-        </Button> */}
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden text-muted-foreground">
