@@ -66,7 +66,7 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
                 layout="fill"
                 objectFit="contain" // Or 'cover' depending on desired effect for a logo
                 className="rounded-full shadow-2xl" // Example styling
-                data-ai-hint="logo AK lettermark circular"
+                data-ai-hint="logo AK"
               />
               {/* Optional: Add decorative elements here if needed, like the blue radar background in the example image.
                   This could be complex with pure CSS and might require SVG or multiple layered divs.
