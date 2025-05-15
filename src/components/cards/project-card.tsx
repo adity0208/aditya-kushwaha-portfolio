@@ -11,6 +11,7 @@ export interface Project {
   description: string;
   longDescription?: string;
   imageUrls: { src: string; hint: string }[];
+  keyFeatures?: string[]; // Added for the new project section layout
   tags: string[];
   liveLink?: string;
   githubLink?: string;
@@ -22,6 +23,8 @@ interface ProjectCardProps {
   project: Project;
 }
 
+// This component is kept for potential future use or other layouts,
+// but is not directly used in the redesigned "Curated Work" section.
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   return (
     <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -82,4 +85,3 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 };
 
 export default ProjectCard;
-
