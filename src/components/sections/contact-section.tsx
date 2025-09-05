@@ -14,7 +14,7 @@ interface ContactSectionProps {
 const ContactSection: FC<ContactSectionProps> = ({ id }) => {
   const [isVisible, setIsVisible] = useState(false)
   const email = "adityakushwaha0208@gmail.com"
-  const linkedinUrl = "https://www.linkedin.com/in/aditya-kushwaha-b89a24247/"
+  const linkedinUrl = "https://www.linkedin.com/in/aditya-kushwaha-512581259/"
 
   useEffect(() => {
     const observer = new IntersectionObserver(

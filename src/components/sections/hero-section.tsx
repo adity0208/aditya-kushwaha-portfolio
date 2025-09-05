@@ -111,7 +111,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
         <div className={`transition-all duration-1000 delay-800 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <div className="mt-16 flex justify-center space-x-8">
             <Link
-              href="https://www.linkedin.com/in/aditya-kushwaha-b89a24247/"
+              href="https://www.linkedin.com/in/aditya-kushwaha-512581259/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
@@ -120,7 +120,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
               <Linkedin className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
             </Link>
             <Link
-              href="https://github.com/adityakushwaha0208"
+              href="https://github.com/adity0208/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
