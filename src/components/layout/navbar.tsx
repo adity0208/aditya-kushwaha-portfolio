@@ -1,4 +1,4 @@
-"use client" 
+"use client"
 import type { FC } from "react"
 import type React from "react" // Explicitly import React type
 import { useState, useEffect } from "react"
@@ -22,13 +22,12 @@ const navItems: NavItem[] = [
 ]
 
 const Navbar: FC = () => {
-  const [mounted, setMounted] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const [isOpen, setIsOpen] = useState(false) // State to control Sheet open/close
 
   useEffect(() => {
-    setMounted(true)
+
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -54,9 +53,7 @@ const Navbar: FC = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  if (!mounted) {
-    return null // Don't render until mounted (client-side only)
-  }
+
 
   const NavLinks: FC<{ onItemClick?: () => void; isMobile?: boolean }> = ({ onItemClick, isMobile }) => (
     <>
@@ -71,10 +68,9 @@ const Navbar: FC = () => {
               onClick={onItemClick} // Close sheet on click for mobile
               className={`group relative flex items-center gap-3 px-4 py-2 rounded-2xl text-sm font-medium transition-all duration-300 cursor-pointer
                 ${isMobile ? "w-full justify-start" : "justify-center"}
-                ${
-                  isActive
-                    ? "text-primary bg-primary/10 shadow-lg shadow-primary/20" // Active state styling
-                    : "text-muted-foreground hover:text-primary hover:bg-primary/5" // Inactive hover state styling
+                ${isActive
+                  ? "text-primary bg-primary/10 shadow-lg shadow-primary/20" // Active state styling
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5" // Inactive hover state styling
                 }
               `}
             >
@@ -108,10 +104,9 @@ const Navbar: FC = () => {
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-500 ease-out
-        ${
-          isScrolled
-            ? "bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-lg shadow-black/5" // Scrolled state styling
-            : "bg-transparent border-b border-transparent" // Transparent at top
+        ${isScrolled
+          ? "bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-lg shadow-black/5" // Scrolled state styling
+          : "bg-transparent border-b border-transparent" // Transparent at top
         }`}
     >
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -119,9 +114,9 @@ const Navbar: FC = () => {
         <Link href="#home" className="group flex items-center gap-3 transition-all duration-300 hover:scale-105">
           <div className="relative">
             {/* Blurry gradient background for AK */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300 w-10 h-10 sm:w-12 sm:h-12" />
             {/* AK text with gradient background */}
-            <div className="relative bg-gradient-to-r from-primary to-accent text-white font-bold text-2xl w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="relative bg-gradient-to-r from-primary to-accent text-white font-bold text-xl sm:text-2xl w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shadow-lg">
               AK
             </div>
           </div>

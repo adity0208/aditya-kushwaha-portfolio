@@ -6,50 +6,24 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 // Re-adding Sparkles, Code2, Heart, Coffee for the richer design elements
 import { Github, Linkedin, Twitter, ArrowRight, Sparkles, Code2, Heart, Coffee } from 'lucide-react';
-import { useEffect, useState } from 'react'; // For scroll-triggered animations
+import { useInView } from '@/hooks/use-in-view';
 
 interface AboutMeSectionProps {
   id: string;
 }
 
 const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Optional: Disconnect after first intersection if animation should only play once
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 } // Adjust threshold as needed (0.1 means 10% of element visible)
-    );
-
-    const element = document.getElementById(id);
-    if (element) {
-      observer.observe(element);
-    }
-
-    // Cleanup observer on component unmount
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-      observer.disconnect();
-    };
-  }, [id]); // Dependency array includes 'id' for re-observing if id changes
+  const [ref, isInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section id={id} className="py-20 sm:py-32 bg-background relative overflow-hidden">
+    <section id={id} ref={ref} className="py-12 md:py-20 sm:py-32 bg-background relative overflow-hidden">
       {/* Background gradient from your original complex code */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30" />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left Column: Text Content - with slide-in animation */}
-          <div className={`transition-all duration-1000 ${isVisible ? "animate-slide-in-left" : "opacity-0"}`}>
+          <div className={`transition-all duration-1000 ${isInView ? "animate-slide-in-left" : "opacity-0"}`}>
             {/* Badge from your original complex code */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mb-8">
               <Heart className="w-4 h-4 text-accent" />
@@ -107,7 +81,7 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
                 <Github className="h-7 w-7 text-muted-foreground group-hover:text-primary transition-colors" />
               </Link>
               <Link
-                href="https://twitter.com/aditya02_08" 
+                href="https://twitter.com/aditya02_08"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter Profile"
@@ -120,8 +94,8 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
             {/* "Explore my work" button with enhanced styling and animation from original complex code */}
             <Button
               asChild
-              variant="ghost" // Changed to ghost to match original "Explore" button style
-              className="group mt-10 px-0 text-primary hover:text-accent text-lg font-semibold hover:bg-transparent"
+              variant="outline" // Changed to outline for better visibility
+              className="group mt-10 text-primary hover:text-accent text-lg font-semibold bg-transparent border-primary/20 hover:border-primary/50"
             >
               <Link href="#projects">
                 <Code2 className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
@@ -133,7 +107,7 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
 
           {/* Right Column: Image/Logo - with all its animations and effects from your original complex code */}
           <div
-            className={`flex justify-center items-center transition-all duration-1000 delay-300 ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}
+            className={`flex justify-center items-center transition-all duration-1000 delay-300 ${isInView ? "animate-slide-in-right" : "opacity-0"}`}
           >
             <div className="relative group">
               {/* Outer glowing effect for the image */}
@@ -141,7 +115,7 @@ const AboutMeSection: FC<AboutMeSectionProps> = ({ id }) => {
               <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem]">
                 <div className="absolute inset-0 rounded-full glass-effect p-4 hover-glow"> {/* hover-glow needs CSS */}
                   <Image
-                    src="/images/3dlogo.png" 
+                    src="/images/3dlogo.png"
                     alt="Aditya Kushwaha - Full Stack Developer"
                     fill
                     className="rounded-full object-cover transition-transform duration-500 group-hover:scale-105"

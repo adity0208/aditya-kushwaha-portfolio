@@ -5,24 +5,18 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 // Re-added Sparkles and Code2 as they are used in the enhanced version
 import { Github, Linkedin, ArrowRight, Mail, Sparkles, Code2 } from 'lucide-react';
-import { useEffect, useState } from 'react'; // Keep useState and useEffect for animations
 
 interface HeroSectionProps {
   id: string;
 }
 
+
+
 const HeroSection: FC<HeroSectionProps> = ({ id }) => {
-  const [isVisible, setIsVisible] = useState(false); // For staggered animations
-
-  useEffect(() => {
-    // Trigger animations on component mount
-    setIsVisible(true);
-  }, []);
-
   return (
     <section
       id={id}
-      className="relative w-full min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 md:py-24 lg:py-32
+      className="relative w-full min-h-[calc(100vh-5rem)] flex items-center justify-center py-12 md:py-24 lg:py-32
                  bg-gradient-to-b from-background via-background to-[hsl(var(--primary)/0.05)] overflow-hidden"
     >
       {/* Subtle planetary glow at the bottom (from target code) */}
@@ -44,7 +38,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
 
       <div className="container z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
         {/* "Available for new projects" Badge (re-introduced from your original, with animations) */}
-        <div className={`transition-all duration-1000 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+        <div className="animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mb-8 animate-glow">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium">Available for new projects</span>
@@ -52,8 +46,8 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
         </div>
 
         {/* Main Heading (Combining best of both, with gradient & animation from your original) */}
-        <div className={`transition-all duration-1000 delay-200 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
-          <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+        <div className="animate-slide-up animation-delay-200 opacity-0 bg-transparent fill-mode-forwards" style={{ animationDelay: '200ms' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground">
             <span className="block">I help founders turn</span>
             <span className="block mt-2 sm:mt-4">
               <span className="text-gradient">ideas into</span> {/* Requires text-gradient CSS */}
@@ -69,7 +63,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
         </div>
 
         {/* Sub-heading/Bio (from your original) */}
-        <div className={`transition-all duration-1000 delay-400 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+        <div className="animate-fade-in opacity-0 fill-mode-forwards" style={{ animationDelay: '400ms' }}>
           <p className="mt-8 max-w-2xl mx-auto text-xl text-muted-foreground sm:text-2xl leading-relaxed">
             Hello, I'm <span className="font-semibold text-foreground">Aditya Kushwaha</span>
             <span className="inline-block animate-float ml-2" style={{ animationDelay: "1s" }}>
@@ -80,7 +74,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
         </div>
 
         {/* Buttons (Enhanced with group hover effects from your original) */}
-        <div className={`transition-all duration-1000 delay-600 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
+        <div className="animate-slide-up opacity-0 fill-mode-forwards" style={{ animationDelay: '600ms' }}>
           <div className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-6">
             <Button
               asChild
@@ -108,7 +102,7 @@ const HeroSection: FC<HeroSectionProps> = ({ id }) => {
         </div>
 
         {/* Social Icons (Enhanced with glass effect and hover effects from your original, keeping mail) */}
-        <div className={`transition-all duration-1000 delay-800 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+        <div className="animate-fade-in opacity-0 fill-mode-forwards" style={{ animationDelay: '800ms' }}>
           <div className="mt-16 flex justify-center space-x-8">
             <Link
               href="https://www.linkedin.com/in/aditya-kushwaha-512581259/"

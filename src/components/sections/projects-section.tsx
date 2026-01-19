@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'; // <--- ADD THIS LINE
 import { Plus, ExternalLinkIcon, Github, Sparkles, Zap, Youtube } from 'lucide-react'; // <--- ADD Youtube HERE
 import { Separator } from '@/components/ui/separator';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react'; // Removed
+import { useInView } from '@/hooks/use-in-view';
 
 
 interface ProjectsSectionProps {
@@ -26,11 +27,11 @@ const projectsData: Project[] = [
     liveLink: 'https://carelinks-fccc4.web.app/',
     isLive: true,
     keyFeatures: [
-        'Secure patient data management with Firebase Firestore.',
-        'Real-time synchronization for up-to-date information.',
-        'Efficient visit scheduling and tracking for health workers.',
-        'PNG report generation and sharing capabilities.',
-        'Role-based access control for data security.',
+      'Secure patient data management with Firebase Firestore.',
+      'Real-time synchronization for up-to-date information.',
+      'Efficient visit scheduling and tracking for health workers.',
+      'PNG report generation and sharing capabilities.',
+      'Role-based access control for data security.',
     ],
   },
   {
@@ -52,57 +53,32 @@ const projectsData: Project[] = [
     ],
   },
   {
-  title: 'Personal Portfolio Website',
-  description: 'A modern, responsive, and interactive portfolio to showcase my projects and skills.',
-  longDescription: 'This website is built with Next.js, React, and Tailwind CSS, leveraging the latest web technologies for a fast, accessible, and visually appealing user experience. It features dynamic content sections, smooth scroll animations, and a responsive design that adapts seamlessly to various devices. My goal is to present my work and expertise clearly and effectively to potential employers and collaborators.',
-  imageUrls: [
-    { src: '/images/portfolio-landing-page.png', hint: 'Portfolio website landing page' },
-  ],
-  tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Responsive Design', 'Animations', 'Portfolio'],
-  githubLink: 'https://github.com/adityakushwaha0208/your-portfolio-repo', // <--- IMPORTANT: Replace with YOUR actual GitHub repo link
-  liveLink: 'https://your-portfolio-live-link.vercel.app/', // <--- IMPORTANT: Replace with YOUR actual live deployment link
-  isLive: true, // Set to true as you are actively working on it/it's deployed
-  keyFeatures: [
+    title: 'Personal Portfolio Website',
+    description: 'A modern, responsive, and interactive portfolio to showcase my projects and skills.',
+    longDescription: 'This website is built with Next.js, React, and Tailwind CSS, leveraging the latest web technologies for a fast, accessible, and visually appealing user experience. It features dynamic content sections, smooth scroll animations, and a responsive design that adapts seamlessly to various devices. My goal is to present my work and expertise clearly and effectively to potential employers and collaborators.',
+    imageUrls: [
+      { src: '/images/portfolio-landing-page.png', hint: 'Portfolio website landing page' },
+    ],
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Responsive Design', 'Animations', 'Portfolio'],
+    githubLink: 'https://github.com/adityakushwaha0208/your-portfolio-repo', // <--- IMPORTANT: Replace with YOUR actual GitHub repo link
+    liveLink: 'https://your-portfolio-live-link.vercel.app/', // <--- IMPORTANT: Replace with YOUR actual live deployment link
+    isLive: true, // Set to true as you are actively working on it/it's deployed
+    keyFeatures: [
       'Interactive and animated UI with scroll effects.',
       'Fully responsive design for desktop, tablet, and mobile.',
       'Showcase for personal projects with detailed descriptions.',
       'Skills and experience section highlighting expertise.',
       'Contact form for easy communication (if implemented).',
       'Optimized for performance and SEO using Next.js.',
-  ],
-},
+    ],
+  },
 ];
 
 const ProjectsSection: FC<ProjectsSectionProps> = ({ id }) => {
-  const [visibleProjects, setVisibleProjects] = useState<boolean[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0");
-            setVisibleProjects((prev) => {
-              const newVisible = [...prev];
-              newVisible[index] = true;
-              return newVisible;
-            });
-            // Optional: Disconnect observer for this entry if animation should only play once
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }, // Adjust threshold as needed
-    );
-
-    const projectElements = document.querySelectorAll(`[data-project-card]`);
-    projectElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect(); // Cleanup observer on component unmount
-  }, []);
+  const [ref, isInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section id={id} className="py-20 sm:py-32 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
+    <section id={id} ref={ref} className="py-12 md:py-20 sm:py-32 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
       {/* Background radial gradient from your original complex code */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent" />
 
@@ -127,14 +103,14 @@ const ProjectsSection: FC<ProjectsSectionProps> = ({ id }) => {
         <div className="space-y-24 lg:space-y-32">
           {projectsData.map((project, index) => {
             const projectUrl = project.liveLink || project.githubLink;
-            const isVisible = visibleProjects[index];
+            // Stagger delay based on index
+            const animationDelay = `${index * 200}ms`;
 
             return (
               <div
                 key={project.title}
-                data-project-card // Used by IntersectionObserver
-                data-index={index} // Used by IntersectionObserver
-                className={`transition-all duration-1000 ${isVisible ? "animate-fade-in" : "opacity-0"}`}
+                className={`transition-all duration-1000 ${isInView ? "animate-fade-in" : "opacity-0"} fill-mode-forwards`}
+                style={{ animationDelay }}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                   {/* Image Column - with all its animations and effects */}
@@ -159,6 +135,7 @@ const ProjectsSection: FC<ProjectsSectionProps> = ({ id }) => {
                               fill
                               className="rounded-2xl object-cover transition-transform duration-700 group-hover:scale-105"
                               data-ai-hint={project.imageUrls[0].hint} // Keep the hint
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                           </Link>
                         ) : (
@@ -168,6 +145,7 @@ const ProjectsSection: FC<ProjectsSectionProps> = ({ id }) => {
                             fill
                             className="rounded-2xl object-cover"
                             data-ai-hint={project.imageUrls[0].hint} // Keep the hint
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                         )}
                       </div>

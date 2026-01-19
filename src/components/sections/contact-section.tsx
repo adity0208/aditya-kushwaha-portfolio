@@ -5,37 +5,20 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Linkedin, Send, Sparkles, ArrowRight } from "lucide-react"
-import { useState, useEffect } from "react"
+// import { useState, useEffect } from "react"
+import { useInView } from "@/hooks/use-in-view"
 
 interface ContactSectionProps {
   id: string
 }
 
 const ContactSection: FC<ContactSectionProps> = ({ id }) => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [ref, isInView] = useInView({ threshold: 0.1 })
   const email = "adityakushwaha0208@gmail.com"
   const linkedinUrl = "https://www.linkedin.com/in/aditya-kushwaha-512581259/"
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 },
-    )
-
-    const element = document.getElementById(id)
-    if (element) {
-      observer.observe(element)
-    }
-
-    return () => observer.disconnect()
-  }, [id])
-
   return (
-    <section id={id} className="py-20 sm:py-32 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
+    <section id={id} ref={ref} className="py-12 md:py-20 sm:py-32 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30" />
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
@@ -47,7 +30,7 @@ const ContactSection: FC<ContactSectionProps> = ({ id }) => {
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <div
-          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? "animate-fade-in" : "opacity-0"}`}
+          className={`text-center mb-16 transition-all duration-1000 ${isInView ? "animate-fade-in" : "opacity-0"}`}
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-effect mb-8 animate-glow hover:scale-105 transition-transform duration-300">
             <Sparkles className="w-4 h-4 text-primary animate-pulse" />
@@ -64,7 +47,7 @@ const ContactSection: FC<ContactSectionProps> = ({ id }) => {
         </div>
 
         {/* Main Card */}
-        <div className={`transition-all duration-1000 delay-300 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
+        <div className={`transition-all duration-1000 delay-300 ${isInView ? "animate-slide-up" : "opacity-0"}`}>
           <Card className="glass-effect border-border/50 hover:border-primary/30 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl shadow-xl relative overflow-hidden group">
             {/* Card Background Effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -161,7 +144,7 @@ const ContactSection: FC<ContactSectionProps> = ({ id }) => {
 
         {/* Additional CTA Section */}
         <div
-          className={`text-center mt-16 transition-all duration-1000 delay-600 ${isVisible ? "animate-fade-in" : "opacity-0"}`}
+          className={`text-center mt-16 transition-all duration-1000 delay-600 ${isInView ? "animate-fade-in" : "opacity-0"}`}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect hover:scale-105 transition-transform duration-300 cursor-default">
             <Send className="w-4 h-4 text-accent animate-pulse" />
